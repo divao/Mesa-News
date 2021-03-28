@@ -1,4 +1,8 @@
-package com.divao.mesanews.presentation.news
+package com.divao.mesanews.presentation
 
-class MainActivity {
+import com.divao.mesanews.MainContentFragment
+import com.divao.mesanews.SingleFragmentContainerActivity
+
+class MainActivity : SingleFragmentContainerActivity() {
+    override val fragment = MainContentFragment.newInstance()
 }
