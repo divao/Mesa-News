@@ -7,9 +7,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers.*
 
-class NewsPresenter(private val view: NewsView) {
+class NewsPresenter(private val view: NewsView, private val mesaService: MesaService) {
 
-    private val mesaService = MesaService()
     private val disposable = CompositeDisposable()
 
     fun fetchNews() {
