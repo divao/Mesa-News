@@ -1,45 +1,38 @@
 package com.divao.mesanews.presentation.news
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.divao.mesanews.R
 import com.divao.mesanews.model.News
 import com.divao.mesanews.util.getProgressDrawable
 import com.divao.mesanews.util.loadImage
-import kotlinx.android.synthetic.main.item_news.view.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.item_news.*
 
 class NewsAdapter(private val context: Context) :
-    RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
-
-    private var newsList: List<News> = emptyList()
+    GroupAdapter<GroupieViewHolder>() {
 
     fun updateNewsList(updatedNewsList: List<News>) {
-        newsList = updatedNewsList
-        notifyDataSetChanged()
+        addAll(updatedNewsList.map { news ->
+            NewsItem(news)
+        })
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
+    private inner class NewsItem(private val news: News) : Item() {
+        override fun bind(
+            viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+            position: Int
+        ) {
+            viewHolder.apply {
+                val progressDrawable = getProgressDrawable(context)
 
-        return NewsViewHolder(view)
-    }
-
-    override fun getItemCount() = newsList.size
-
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.bind(context, newsList[position])
-    }
-
-    class NewsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private val progressDrawable = getProgressDrawable(view.context)
-
-        fun bind(context: Context, news: News) {
-            view.title.text = news.title
-            view.description.text = news.description
-            view.imageView.loadImage(news.imageUrl, progressDrawable)
+                title.text = news.title
+                description.text = news.description
+                imageView.loadImage(news.imageUrl, progressDrawable)
+            }
         }
+
+        override fun getLayout(): Int = R.layout.item_news
     }
 }
