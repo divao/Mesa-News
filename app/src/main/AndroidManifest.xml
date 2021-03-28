@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MesaNews">
         <activity
-            android:name=".presentation.news.NewsActivity"
-            android:label="@string/title_activity_news"
+            android:name=".presentation.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/Theme.MesaNews.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

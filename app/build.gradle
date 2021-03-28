@@ -75,4 +75,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.xwray:groupie:2.7.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.7.0'
+    implementation 'ru.terrakok.cicerone:cicerone:5.0.0'
+    implementation 'com.evernote:android-state:1.4.1'
+    kapt 'com.evernote:android-state-processor:1.4.1'
 }
