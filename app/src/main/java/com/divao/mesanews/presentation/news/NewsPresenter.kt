@@ -12,11 +12,7 @@ class NewsPresenter(private val view: NewsView) {
     private val mesaService = MesaService()
     private val disposable = CompositeDisposable()
 
-    fun refresh() {
-        fetchNews()
-    }
-
-    private fun fetchNews() {
+    fun fetchNews() {
         view.displayLoading()
         disposable.add(
             mesaService.getNewsList()

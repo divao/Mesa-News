@@ -11,12 +11,13 @@ import com.divao.mesanews.util.getProgressDrawable
 import com.divao.mesanews.util.loadImage
 import kotlinx.android.synthetic.main.item_news.view.*
 
-class NewsAdapter(val context: Context, var newsList: ArrayList<News>) :
+class NewsAdapter(private val context: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
+    private var newsList: List<News> = emptyList()
+
     fun updateNewsList(updatedNewsList: List<News>) {
-        newsList.clear()
-        newsList.addAll(updatedNewsList)
+        newsList = updatedNewsList
         notifyDataSetChanged()
     }
 
@@ -29,19 +30,16 @@ class NewsAdapter(val context: Context, var newsList: ArrayList<News>) :
     override fun getItemCount() = newsList.size
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.bind(context, newsList[position], position)
+        holder.bind(context, newsList[position])
     }
 
-    class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val imageView = view.imageView
-        private val title = view.title
-        private val description = view.description
+    class NewsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val progressDrawable = getProgressDrawable(view.context)
 
-        fun bind(context: Context, news: News, position: Int) {
-            title.text = news.title
-            description.text = news.description
-            imageView.loadImage(news.imageUrl, progressDrawable)
+        fun bind(context: Context, news: News) {
+            view.title.text = news.title
+            view.description.text = news.description
+            view.imageView.loadImage(news.imageUrl, progressDrawable)
         }
     }
 }

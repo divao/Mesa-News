@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_news.*
 class NewsActivity : AppCompatActivity(), NewsView {
 
     private val presenter = NewsPresenter(this)
-    private val newsAdapter = NewsAdapter(this, arrayListOf())
+    private val newsAdapter = NewsAdapter(this)
 
     override fun displayLoading() {
         errorList.visibility = View.GONE
@@ -39,7 +39,7 @@ class NewsActivity : AppCompatActivity(), NewsView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        presenter.refresh()
+        presenter.fetchNews()
 
         newsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -48,7 +48,7 @@ class NewsActivity : AppCompatActivity(), NewsView {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            presenter.refresh()
+            presenter.fetchNews()
         }
     }
 
