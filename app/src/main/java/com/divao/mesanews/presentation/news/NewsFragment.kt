@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.divao.mesanews.MNApplication
 import com.divao.mesanews.R
 import com.divao.mesanews.model.News
 import kotlinx.android.synthetic.main.fragment_news.*
+import javax.inject.Inject
 
 class NewsFragment : Fragment(), NewsView {
 
@@ -17,7 +19,8 @@ class NewsFragment : Fragment(), NewsView {
         fun newInstance(): NewsFragment = NewsFragment()
     }
 
-    private val presenter = NewsPresenter(this)
+    @Inject
+    lateinit var presenter: NewsPresenter
     private lateinit var newsAdapter: NewsAdapter
 
     override fun displayLoading() {
@@ -68,6 +71,13 @@ class NewsFragment : Fragment(), NewsView {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         newsAdapter = NewsAdapter(context)
+        activity?.let {
+            DaggerNewsComponent.builder()
+                .newsModule(NewsModule(this))
+                .applicationComponent((it.application as MNApplication).component)
+                .build()
+                .inject(this)
+        }
     }
 
     override fun onDestroyView() {
