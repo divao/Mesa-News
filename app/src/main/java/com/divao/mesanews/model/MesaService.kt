@@ -7,17 +7,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MesaService {
 
-    private val BASE_URL = "https://mesa-news-api.herokuapp.com"
-    private val api: MesaApi
-
-    init {
-        api = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(MesaApi::class.java)
+    companion object {
+        private val BASE_URL = "https://mesa-news-api.herokuapp.com"
     }
+
+    private val api = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+        .create(MesaApi::class.java)
 
     fun getNewsList(): Single<List<News>> {
         val newsPage = api.getNewsPage()
