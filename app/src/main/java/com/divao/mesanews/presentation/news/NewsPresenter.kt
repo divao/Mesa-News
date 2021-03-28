@@ -4,7 +4,6 @@ import com.divao.mesanews.model.MesaService
 import com.divao.mesanews.model.News
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers.*
 
@@ -12,27 +11,37 @@ class NewsPresenter(private val view: NewsView, private val mesaService: MesaSer
 
     private val disposable = CompositeDisposable()
 
-    fun fetchNews() {
-        view.displayLoading()
-        disposable.add(
-            mesaService.getNewsList()
-                .subscribeOn(newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ newsList ->
-                    view.displayNewsList(newsList)
-                    view.dismissLoading()
-                }, {
-                    view.displayError()
-                    view.dismissLoading()
-                })
-        )
+    init {
+        view.onViewLoaded.doOnNext {
+            view.displayLoading()
+        }.flatMapSingle {
+            if (it) {
+                mesaService.getFavoriteNewsList()
+                    .subscribeOn(newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+            } else {
+                mesaService.getNewsList()
+                    .subscribeOn(io())
+                    .observeOn(AndroidSchedulers.mainThread())
+            }
+        }
+            .subscribe({ newsList ->
+                view.displayNewsList(newsList)
+                view.dismissLoading()
+            }, {
+                view.displayError()
+                view.dismissLoading()
+            }).addTo(disposable)
     }
 
-    fun setFavorite(newsId: String) {
-        mesaService.setFavorite(newsId).subscribe().addTo(disposable)
+    fun setFavorite(news: News) {
+        mesaService.setFavoriteNews(news).subscribe().addTo(disposable)
+        mesaService.setFavoriteIds(news.title).subscribe().addTo(disposable)
     }
 
     fun onViewDestroyed() {
         disposable.clear()
     }
+
+
 }

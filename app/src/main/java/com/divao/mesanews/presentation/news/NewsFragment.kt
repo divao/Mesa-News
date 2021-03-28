@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.divao.mesanews.FlowContainerFragment
-import com.divao.mesanews.MNApplication
 import com.divao.mesanews.R
 import com.divao.mesanews.model.News
-import io.reactivex.Observable
+import com.evernote.android.state.State
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
@@ -19,13 +18,17 @@ import kotlinx.android.synthetic.main.fragment_news.*
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class NewsFragment : Fragment(), NewsView {
+class NewsFragment() : Fragment(), NewsView {
 
     companion object {
-        fun newInstance(): NewsFragment = NewsFragment()
+        fun newInstance(filterByFavorites: Boolean): NewsFragment = NewsFragment().apply {
+            this.filterByFavorites = filterByFavorites.toString()
+        }
     }
 
     private val disposeBag = CompositeDisposable()
+    @State
+    lateinit var filterByFavorites: String
 
     @Inject
     lateinit var presenter: NewsPresenter
@@ -35,7 +38,7 @@ class NewsFragment : Fragment(), NewsView {
 
     private lateinit var newsAdapter: NewsAdapter
 
-    override val onViewLoaded: PublishSubject<String> = PublishSubject.create()
+    override val onViewLoaded: PublishSubject<Boolean> = PublishSubject.create()
 
     override fun displayLoading() {
         errorList.visibility = View.GONE
@@ -66,7 +69,7 @@ class NewsFragment : Fragment(), NewsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.fetchNews()
+        onViewLoaded.onNext(filterByFavorites.toBoolean())
         initViews()
     }
 
@@ -76,13 +79,13 @@ class NewsFragment : Fragment(), NewsView {
             adapter = newsAdapter
         }
 
-        newsAdapter.onFavoriteClicked.subscribe { newsId ->
-            presenter.setFavorite(newsId)
+        newsAdapter.onFavoriteClicked.subscribe { news ->
+            presenter.setFavorite(news)
         }.addTo(disposeBag)
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            presenter.fetchNews()
+            onViewLoaded.onNext(filterByFavorites.toBoolean())
         }
     }
 

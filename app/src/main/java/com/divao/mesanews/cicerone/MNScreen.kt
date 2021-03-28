@@ -9,6 +9,11 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 sealed class MNScreen : SupportAppScreen(), Parcelable {
     @Parcelize
     class NewsScreen : MNScreen() {
-        override fun getFragment(): Fragment = NewsFragment.newInstance()
+        override fun getFragment(): Fragment = NewsFragment.newInstance(false)
+    }
+
+    @Parcelize
+    class FavoriteNewsScreen : MNScreen() {
+        override fun getFragment(): Fragment = NewsFragment.newInstance(true)
     }
 }

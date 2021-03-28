@@ -17,12 +17,13 @@ import kotlinx.android.synthetic.main.item_news.*
 class NewsAdapter(private val context: Context) :
     GroupAdapter<GroupieViewHolder>() {
 
-    private val onFavoriteClickedSubject: PublishSubject<String> = PublishSubject.create()
+    private val onFavoriteClickedSubject: PublishSubject<News> = PublishSubject.create()
 
-    val onFavoriteClicked: Observable<String>
+    val onFavoriteClicked: Observable<News>
         get() = onFavoriteClickedSubject
 
     fun updateNewsList(updatedNewsList: List<News>) {
+        clear()
         addAll(updatedNewsList.map { news ->
             NewsItem(news)
         })
@@ -43,7 +44,7 @@ class NewsAdapter(private val context: Context) :
 
                 favoriteButton.clicks().map {
                     setFavorite(news, favoriteButton)
-                    news.title
+                    news
                 }.subscribe(onFavoriteClickedSubject)
             }
         }

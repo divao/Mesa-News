@@ -13,5 +13,5 @@ interface NewsView {
 
     fun displayError()
 
-    val onViewLoaded: Observable<String>
+    val onViewLoaded: Observable<Boolean>
 }
