@@ -2,6 +2,7 @@ package com.divao.mesanews
 
 import android.app.Application
 import com.evernote.android.state.StateSaver
+import com.pacoworks.rxpaper2.RxPaperBook
 
 class MNApplication : Application() {
 
@@ -15,5 +16,6 @@ class MNApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         StateSaver.setEnabledForAllActivitiesAndSupportFragments(this, true)
+        RxPaperBook.init(applicationContext)
     }
 }

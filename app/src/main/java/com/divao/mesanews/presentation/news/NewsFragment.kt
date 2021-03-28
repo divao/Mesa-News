@@ -11,6 +11,10 @@ import com.divao.mesanews.FlowContainerFragment
 import com.divao.mesanews.MNApplication
 import com.divao.mesanews.R
 import com.divao.mesanews.model.News
+import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_news.*
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -21,6 +25,8 @@ class NewsFragment : Fragment(), NewsView {
         fun newInstance(): NewsFragment = NewsFragment()
     }
 
+    private val disposeBag = CompositeDisposable()
+
     @Inject
     lateinit var presenter: NewsPresenter
 
@@ -28,6 +34,8 @@ class NewsFragment : Fragment(), NewsView {
     lateinit var router: Router
 
     private lateinit var newsAdapter: NewsAdapter
+
+    override val onViewLoaded: PublishSubject<String> = PublishSubject.create()
 
     override fun displayLoading() {
         errorList.visibility = View.GONE
@@ -68,6 +76,10 @@ class NewsFragment : Fragment(), NewsView {
             adapter = newsAdapter
         }
 
+        newsAdapter.onFavoriteClicked.subscribe { newsId ->
+            presenter.setFavorite(newsId)
+        }.addTo(disposeBag)
+
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             presenter.fetchNews()
@@ -89,6 +101,7 @@ class NewsFragment : Fragment(), NewsView {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.onViewDestroyed()
+        disposeBag.clear()
     }
 
 }

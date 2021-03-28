@@ -5,6 +5,7 @@ import com.divao.mesanews.model.News
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers.*
 
 class NewsPresenter(private val view: NewsView, private val mesaService: MesaService) {
@@ -17,18 +18,18 @@ class NewsPresenter(private val view: NewsView, private val mesaService: MesaSer
             mesaService.getNewsList()
                 .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<List<News>>() {
-                    override fun onSuccess(value: List<News>) {
-                        view.displayNewsList(value)
-                        view.dismissLoading()
-                    }
+                .subscribe({ newsList ->
+                    view.displayNewsList(newsList)
+                    view.dismissLoading()
+                }, {
+                    view.displayError()
+                    view.dismissLoading()
+                })
+        )
+    }
 
-                    override fun onError(e: Throwable?) {
-                        view.displayError()
-                        view.dismissLoading()
-                    }
-                }
-        ))
+    fun setFavorite(newsId: String) {
+        mesaService.setFavorite(newsId).subscribe().addTo(disposable)
     }
 
     fun onViewDestroyed() {
