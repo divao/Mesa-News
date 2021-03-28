@@ -28,4 +28,8 @@
     <style name="Theme.MesaNews.ImageButtonTheme">
         <item name="tint">@color/primaryDarkTextColor</item>
     </style>
+
+    <style name="Theme.MesaNews.CardViewTheme">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+    </style>
 </resources>

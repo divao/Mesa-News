@@ -31,4 +31,8 @@
     </style>
 
     <style name="Theme.MesaNews.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.MesaNews.CardViewTheme">
+        <item name="cardBackgroundColor">@color/cardLightBackgroundColor</item>
+    </style>
 </resources>
