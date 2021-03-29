@@ -18,15 +18,22 @@ class MainContentFragment : Fragment(), ExitHandler {
         fun newInstance() = MainContentFragment()
         private const val NEWS_FLOW_FRAGMENT_TAG = "NEWS_FLOW_FRAGMENT_TAG"
         private const val FAVORITES_FLOW_FRAGMENT_TAG = "FAVORITES_FLOW_FRAGMENT_TAG"
+        private const val SIGN_UP_FLOW_FRAGMENT_TAG = "SIGN_UP_FLOW_FRAGMENT_TAG"
     }
 
     private val newsFCFragment: FlowContainerFragment by lazy {
         childFragmentManager.findFragmentByTag(NEWS_FLOW_FRAGMENT_TAG) as? FlowContainerFragment
             ?: FlowContainerFragment.newInstance(MNScreen.NewsScreen())
     }
+
     private val favoritesFCFragment: FlowContainerFragment by lazy {
         childFragmentManager.findFragmentByTag(FAVORITES_FLOW_FRAGMENT_TAG) as? FlowContainerFragment
             ?: FlowContainerFragment.newInstance(MNScreen.FavoriteNewsScreen())
+    }
+
+    private val signUpFCFragment : FlowContainerFragment by lazy {
+        childFragmentManager.findFragmentByTag(SIGN_UP_FLOW_FRAGMENT_TAG) as? FlowContainerFragment
+            ?: FlowContainerFragment.newInstance(MNScreen.SignUpScreen())
     }
 
     override fun onCreateView(
@@ -52,6 +59,7 @@ class MainContentFragment : Fragment(), ExitHandler {
             when (menuItem.itemId) {
                 R.id.news -> changeFlow(newsFCFragment, NEWS_FLOW_FRAGMENT_TAG)
                 R.id.favorites -> changeFlow(favoritesFCFragment, FAVORITES_FLOW_FRAGMENT_TAG)
+                R.id.signUp -> changeFlow(signUpFCFragment, SIGN_UP_FLOW_FRAGMENT_TAG)
             }
             true
         }
@@ -60,6 +68,7 @@ class MainContentFragment : Fragment(), ExitHandler {
             when (menuItem.itemId) {
                 R.id.news -> newsFCFragment.resetStack()
                 R.id.favorites -> favoritesFCFragment.resetStack()
+                R.id.signUp -> signUpFCFragment.resetStack()
             }
         }
     }
