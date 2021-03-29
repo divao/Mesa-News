@@ -25,7 +25,7 @@ class MainContentFragment : Fragment(), ExitHandler {
     }
     private val favoritesFCFragment: FlowContainerFragment by lazy {
         childFragmentManager.findFragmentByTag(FAVORITES_FLOW_FRAGMENT_TAG) as? FlowContainerFragment
-            ?: FlowContainerFragment.newInstance(MNScreen.NewsScreen())
+            ?: FlowContainerFragment.newInstance(MNScreen.FavoriteNewsScreen())
     }
 
     override fun onCreateView(

@@ -12,6 +12,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/primaryDarkTextColor</item>
         <item name="android:toolbarStyle">@style/Theme.MesaNews.ToolbarTheme</item>
+        <item name="imageButtonStyle">@style/Theme.MesaNews.ImageButtonTheme</item>
     </style>
 
     <style name="Theme.MesaNews.NoActionBar">
@@ -22,5 +23,13 @@
     <style name="Theme.MesaNews.ToolbarTheme">
         <item name="titleTextColor">@color/primaryDarkTextColor</item>
         <item name="android:textColor">@color/primaryDarkTextColor</item>
+    </style>
+
+    <style name="Theme.MesaNews.ImageButtonTheme">
+        <item name="tint">@color/primaryDarkTextColor</item>
+    </style>
+
+    <style name="Theme.MesaNews.CardViewTheme">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
     </style>
 </resources>

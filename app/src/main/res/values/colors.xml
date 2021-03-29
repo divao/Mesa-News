@@ -11,4 +11,5 @@
     <color name="secondaryDarkTextColor">#FFFFFF</color>
     <color name="backgroundLightColor">#FFFFFF</color>
     <color name="backgroundDarkColor">#121212</color>
+    <color name="cardLightBackgroundColor">#EFEBE9</color>
 </resources>

@@ -7,16 +7,9 @@ data class News(
     val title: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("content")
-    val content: String,
-    @SerializedName("author")
-    val author: String,
     @SerializedName("published_at")
     val publishedAt: String,
-    @SerializedName("highlight")
-    val highlight: Boolean,
-    @SerializedName("url")
-    val url: String,
     @SerializedName("image_url")
-    val imageUrl: String
+    val imageUrl: String,
+    var isFavorite: Boolean
 )
