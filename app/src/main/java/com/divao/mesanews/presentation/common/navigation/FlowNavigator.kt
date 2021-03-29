@@ -1,4 +1,4 @@
-package com.divao.mesanews.cicerone
+package com.divao.mesanews.presentation.common.navigation
 
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager

@@ -1,8 +1,8 @@
-package com.divao.mesanews.model
+package com.divao.mesanews.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Pagination(
+data class PaginationRM(
     @SerializedName("current_page")
     val currentPage: Int,
     @SerializedName("per_page")

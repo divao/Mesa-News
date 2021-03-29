@@ -1,10 +1,10 @@
-package com.divao.mesanews.model
+package com.divao.mesanews.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class NewsPage(
+data class NewsPageRM(
     @SerializedName("pagination")
-    val pagination: Pagination,
+    val paginationRM: PaginationRM,
     @SerializedName("data")
-    val newsList: List<News>
+    val newsListRM: List<NewsRM>
 )

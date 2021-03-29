@@ -1,10 +1,12 @@
-package com.divao.mesanews.cicerone
+package com.divao.mesanews.presentation.common.navigation
 
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.divao.mesanews.ApplicationComponent
-import com.divao.mesanews.FlowContainerFragment
-import com.divao.mesanews.di.PerFlow
+import com.divao.mesanews.presentation.common.FlowContainerFragment
+import com.divao.mesanews.common.di.PerFlow
+import com.divao.mesanews.data.repository.NewsRepository
+import com.divao.mesanews.domain.datarepository.NewsDataRepository
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -28,6 +30,10 @@ class FlowModule(
     @Provides
     @PerFlow
     fun provideCustomRouter(cicerone: Cicerone<Router>): Router = cicerone.router
+
+    @Provides
+    @PerFlow
+    fun newsDataRepository(newsRepository: NewsRepository): NewsDataRepository = newsRepository
 }
 
 @Component(dependencies = [(ApplicationComponent::class)], modules = [(FlowModule::class)])
@@ -35,4 +41,5 @@ class FlowModule(
 interface FlowComponent : ApplicationComponent {
     fun inject(flowContainerFragment: FlowContainerFragment)
     fun router(): Router
+    fun newsDataRepository(): NewsDataRepository
 }

@@ -1,4 +1,4 @@
-package com.divao.mesanews.di
+package com.divao.mesanews.common.di
 
 import javax.inject.Qualifier
 

@@ -1,6 +1,5 @@
-package com.divao.mesanews.presentation.news
+package com.divao.mesanews.presentation.scene.news
 
-import com.divao.mesanews.model.News
 import io.reactivex.Observable
 
 interface NewsView {
@@ -9,7 +8,7 @@ interface NewsView {
 
     fun dismissLoading()
 
-    fun displayNewsList(newsList : List<News>)
+    fun displayNewsList(newsList : List<NewsVM>)
 
     fun displayError()
 

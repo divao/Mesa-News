@@ -1,8 +1,8 @@
-package com.divao.mesanews.cicerone
+package com.divao.mesanews.presentation.common.navigation
 
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
-import com.divao.mesanews.presentation.news.NewsFragment
+import com.divao.mesanews.presentation.scene.news.NewsFragment
 import kotlinx.android.parcel.Parcelize
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
