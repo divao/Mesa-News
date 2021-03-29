@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/Theme.MesaNews.PopupOverlay"
+        app:title="@string/app_name" />
+
+    <RelativeLayout
+        android:id="@+id/parentViewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_field_name"
+                android:inputType="textPersonName"
+                android:lineSpacingExtra="8sp"
+                android:textSize="17sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameInputLayout"
+            android:paddingTop="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_field_email"
+                android:inputType="textEmailAddress"
+                android:lineSpacingExtra="8sp"
+                android:textSize="17sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailInputLayout"
+            android:paddingTop="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_field_password"
+                android:inputType="textPassword"
+                android:lineSpacingExtra="8sp"
+                android:textSize="17sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordConfirmationInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordInputLayout"
+            android:paddingTop="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordConfirmationEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_field_password_confirmation"
+                android:inputType="textPassword"
+                android:lineSpacingExtra="8sp"
+                android:textSize="17sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordConfirmationInputLayout"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="@string/sign_up" />
+
+    </RelativeLayout>
+
+</LinearLayout>

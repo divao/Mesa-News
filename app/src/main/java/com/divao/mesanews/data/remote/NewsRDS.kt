@@ -15,19 +15,4 @@ interface NewsRDS {
     )
     @GET("v1/client/news?current_page=&per_page=&published_at=")
     fun getNewsPage(): Single<NewsPageRM>
-
-    @Headers(
-        "Content-Type: application/json",
-        "Authorization: Bearer $TOKEN"
-    )
-    @GET("v1/client/news/highlights")
-    fun getHighlights(): Single<List<NewsRM>>
-
-//    @Headers("Content-Type: application/json")
-//    @POST("v1/client/auth/signup")
-//    fun signUp(@Body body: SignUpBody): Single<String>
-//
-//    @Headers("Content-Type: application/json")
-//    @POST("v1/client/auth/signin")
-//    fun signIn(@Body body: SignInBody): Single<String>
 }

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MesaNews">
         <activity
             android:name="com.divao.mesanews.presentation.common.MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MesaNews.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
