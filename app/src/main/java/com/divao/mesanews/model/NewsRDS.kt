@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 const val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjU5LCJlbWFpbCI6ImRpbWFzLmdhYnJpZWxAenJvYmFuay5jb20uYnIifQ.a3j7sRx8FIedZCfDGLocduOYpcibfIenX7TVJjv6Sis"
 
-interface MesaApi {
+interface NewsRDS {
 
     @Headers(
         "Content-Type: application/json",

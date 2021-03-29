@@ -2,8 +2,9 @@ package com.divao.mesanews
 
 import android.content.Context
 import com.divao.mesanews.di.ApplicationContext
-import com.divao.mesanews.model.MesaApi
-import com.divao.mesanews.model.MesaService
+import com.divao.mesanews.model.NewsCDS
+import com.divao.mesanews.model.NewsRDS
+import com.divao.mesanews.model.NewsRepository
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -30,14 +31,20 @@ class ApplicationModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideMesaApi(retrofitBuilder: Retrofit): MesaApi {
-        return retrofitBuilder.create(MesaApi::class.java)
+    fun provideNewsRDS(retrofitBuilder: Retrofit): NewsRDS {
+        return retrofitBuilder.create(NewsRDS::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideMesaService(mesaApi: MesaApi): MesaService {
-        return MesaService(mesaApi)
+    fun providesNewsCDS(): NewsCDS {
+        return NewsCDS()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(newsRDS: NewsRDS, newsCDS: NewsCDS): NewsRepository {
+        return NewsRepository(newsRDS, newsCDS)
     }
 
     @Provides
@@ -49,7 +56,7 @@ class ApplicationModule(private val context: Context) {
 @Component(modules = [ApplicationModule::class])
 @Singleton
 interface ApplicationComponent {
-    fun exportMesaService(): MesaService
+    fun exportNewsRepository(): NewsRepository
 
     @ApplicationContext
     fun context(): Context

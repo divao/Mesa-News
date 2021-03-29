@@ -1,13 +1,13 @@
 package com.divao.mesanews.presentation.news
 
-import com.divao.mesanews.model.MesaService
+import com.divao.mesanews.model.NewsRepository
 import com.divao.mesanews.model.News
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers.*
 
-class NewsPresenter(private val view: NewsView, private val mesaService: MesaService) {
+class NewsPresenter(private val view: NewsView, private val newsRepository: NewsRepository) {
 
     private val disposable = CompositeDisposable()
 
@@ -16,11 +16,11 @@ class NewsPresenter(private val view: NewsView, private val mesaService: MesaSer
             view.displayLoading()
         }.flatMapSingle { filterByFavorites ->
             if (filterByFavorites) {
-                mesaService.getFavoriteNewsList()
+                newsRepository.getFavoriteNewsList()
                     .subscribeOn(newThread())
                     .observeOn(AndroidSchedulers.mainThread())
             } else {
-                mesaService.getNewsList()
+                newsRepository.getNewsList()
                     .subscribeOn(io())
                     .observeOn(AndroidSchedulers.mainThread())
             }
@@ -35,8 +35,8 @@ class NewsPresenter(private val view: NewsView, private val mesaService: MesaSer
     }
 
     fun setFavorite(news: News) {
-        mesaService.setFavoriteNews(news).subscribe().addTo(disposable)
-        mesaService.setFavoriteIds(news.title).subscribe().addTo(disposable)
+        newsRepository.upsertFavoriteNews(news).subscribe().addTo(disposable)
+        newsRepository.upsertFavoriteIds(news.title).subscribe().addTo(disposable)
     }
 
     fun onViewDestroyed() {
