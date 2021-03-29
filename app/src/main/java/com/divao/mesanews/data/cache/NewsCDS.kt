@@ -1,5 +1,9 @@
-package com.divao.mesanews.model
+package com.divao.mesanews.data.cache
 
+import com.divao.mesanews.data.cache.model.NewsCM
+import com.divao.mesanews.data.mapper.toCM
+import com.divao.mesanews.data.remote.model.NewsRM
+import com.divao.mesanews.domain.model.News
 import com.pacoworks.rxpaper2.RxPaperBook
 import io.reactivex.Completable
 import io.reactivex.Single

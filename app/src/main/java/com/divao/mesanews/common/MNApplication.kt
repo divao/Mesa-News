@@ -1,6 +1,9 @@
-package com.divao.mesanews
+package com.divao.mesanews.common
 
 import android.app.Application
+import com.divao.mesanews.ApplicationComponent
+import com.divao.mesanews.ApplicationModule
+import com.divao.mesanews.DaggerApplicationComponent
 import com.evernote.android.state.StateSaver
 import com.pacoworks.rxpaper2.RxPaperBook
 

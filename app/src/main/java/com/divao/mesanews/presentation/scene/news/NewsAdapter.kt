@@ -1,9 +1,8 @@
-package com.divao.mesanews.presentation.news
+package com.divao.mesanews.presentation.scene.news
 
 import android.content.Context
 import android.widget.ImageButton
 import com.divao.mesanews.R
-import com.divao.mesanews.model.News
 import com.divao.mesanews.util.getProgressDrawable
 import com.divao.mesanews.util.loadImage
 import com.jakewharton.rxbinding3.view.clicks
@@ -17,19 +16,19 @@ import kotlinx.android.synthetic.main.item_news.*
 class NewsAdapter(private val context: Context) :
     GroupAdapter<GroupieViewHolder>() {
 
-    private val onFavoriteClickedSubject: PublishSubject<News> = PublishSubject.create()
+    private val onFavoriteClickedSubject: PublishSubject<NewsVM> = PublishSubject.create()
 
-    val onFavoriteClicked: Observable<News>
+    val onFavoriteClicked: Observable<NewsVM>
         get() = onFavoriteClickedSubject
 
-    fun updateNewsList(updatedNewsList: List<News>) {
+    fun updateNewsList(updatedNewsList: List<NewsVM>) {
         clear()
         addAll(updatedNewsList.map { news ->
             NewsItem(news)
         })
     }
 
-    private inner class NewsItem(private val news: News) : Item() {
+    private inner class NewsItem(private val newsVM: NewsVM) : Item() {
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
@@ -37,14 +36,14 @@ class NewsAdapter(private val context: Context) :
             viewHolder.apply {
                 val progressDrawable = getProgressDrawable(context)
 
-                title.text = news.title
-                description.text = news.description
-                imageView.loadImage(news.imageUrl, progressDrawable)
-                setFavoriteButton(news.isFavorite, favoriteButton)
+                title.text = newsVM.title
+                description.text = newsVM.description
+                imageView.loadImage(newsVM.imageUrl, progressDrawable)
+                setFavoriteButton(newsVM.isFavorite, favoriteButton)
 
                 favoriteButton.clicks().map {
-                    setFavorite(news, favoriteButton)
-                    news
+                    setFavorite(newsVM, favoriteButton)
+                    newsVM
                 }.subscribe(onFavoriteClickedSubject)
             }
         }
@@ -57,13 +56,13 @@ class NewsAdapter(private val context: Context) :
             }
         }
 
-        fun setFavorite(news: News, favoriteButton: ImageButton) {
-            if (news.isFavorite) {
+        fun setFavorite(newsVM: NewsVM, favoriteButton: ImageButton) {
+            if (newsVM.isFavorite) {
                 setFavoriteButton(false, favoriteButton)
-                news.isFavorite = false
+                newsVM.isFavorite = false
             } else {
                 setFavoriteButton(true, favoriteButton)
-                news.isFavorite = true
+                newsVM.isFavorite = true
             }
         }
 

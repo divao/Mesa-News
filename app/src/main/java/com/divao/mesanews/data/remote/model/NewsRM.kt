@@ -1,8 +1,8 @@
-package com.divao.mesanews.model
+package com.divao.mesanews.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class News(
+data class NewsRM(
     @SerializedName("title")
     val title: String,
     @SerializedName("description")
@@ -10,6 +10,5 @@ data class News(
     @SerializedName("published_at")
     val publishedAt: String,
     @SerializedName("image_url")
-    val imageUrl: String,
-    var isFavorite: Boolean
+    val imageUrl: String
 )

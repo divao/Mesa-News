@@ -1,8 +1,9 @@
-package com.divao.mesanews
+package com.divao.mesanews.presentation.common
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.divao.mesanews.R
 
 abstract class SingleFragmentContainerActivity : AppCompatActivity() {
 

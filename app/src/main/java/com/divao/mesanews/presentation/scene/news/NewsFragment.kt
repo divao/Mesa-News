@@ -1,4 +1,4 @@
-package com.divao.mesanews.presentation.news
+package com.divao.mesanews.presentation.scene.news
 
 import android.content.Context
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.divao.mesanews.FlowContainerFragment
+import com.divao.mesanews.presentation.common.FlowContainerFragment
 import com.divao.mesanews.R
-import com.divao.mesanews.model.News
 import com.evernote.android.state.State
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -51,7 +50,7 @@ class NewsFragment() : Fragment(), NewsView {
         loadingView.visibility = View.GONE
     }
 
-    override fun displayNewsList(newsList: List<News>) {
+    override fun displayNewsList(newsList: List<com.divao.mesanews.presentation.scene.news.NewsVM>) {
         errorList.visibility = View.GONE
         if(newsList.isNotEmpty()) {
             newsRecyclerView.visibility = View.VISIBLE

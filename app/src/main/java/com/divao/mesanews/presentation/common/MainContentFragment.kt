@@ -1,11 +1,12 @@
-package com.divao.mesanews
+package com.divao.mesanews.presentation.common
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.divao.mesanews.cicerone.MNScreen
+import com.divao.mesanews.R
+import com.divao.mesanews.presentation.common.navigation.MNScreen
 import kotlinx.android.synthetic.main.fragment_main_content.*
 
 class MainContentFragment : Fragment(), ExitHandler {

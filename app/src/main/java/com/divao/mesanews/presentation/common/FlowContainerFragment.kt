@@ -1,4 +1,4 @@
-package com.divao.mesanews
+package com.divao.mesanews.presentation.common
 
 import android.content.Context
 import android.os.Bundle
@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.divao.mesanews.cicerone.*
+import com.divao.mesanews.R
+import com.divao.mesanews.common.MNApplication
+import com.divao.mesanews.presentation.common.navigation.*
+import com.divao.mesanews.presentation.common.navigation.FlowComponent
+import com.divao.mesanews.presentation.common.navigation.FlowModule
+import com.divao.mesanews.presentation.common.navigation.FlowNavigator
+import com.divao.mesanews.presentation.common.navigation.MNScreen
 import com.evernote.android.state.State
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.Screen
 import java.lang.RuntimeException
 import javax.inject.Inject
 
