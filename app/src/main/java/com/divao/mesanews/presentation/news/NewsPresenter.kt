@@ -14,8 +14,8 @@ class NewsPresenter(private val view: NewsView, private val mesaService: MesaSer
     init {
         view.onViewLoaded.doOnNext {
             view.displayLoading()
-        }.flatMapSingle {
-            if (it) {
+        }.flatMapSingle { filterByFavorites ->
+            if (filterByFavorites) {
                 mesaService.getFavoriteNewsList()
                     .subscribeOn(newThread())
                     .observeOn(AndroidSchedulers.mainThread())

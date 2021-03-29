@@ -43,6 +43,7 @@ class NewsFragment() : Fragment(), NewsView {
     override fun displayLoading() {
         errorList.visibility = View.GONE
         newsRecyclerView.visibility = View.GONE
+        noFavoriteNewsView.visibility = View.GONE
         loadingView.visibility = View.VISIBLE
     }
 
@@ -52,13 +53,18 @@ class NewsFragment() : Fragment(), NewsView {
 
     override fun displayNewsList(newsList: List<News>) {
         errorList.visibility = View.GONE
-        newsRecyclerView.visibility = View.VISIBLE
-        newsAdapter.updateNewsList(newsList)
+        if(newsList.isNotEmpty()) {
+            newsRecyclerView.visibility = View.VISIBLE
+            newsAdapter.updateNewsList(newsList)
+        } else {
+            noFavoriteNewsView.visibility = View.VISIBLE
+        }
     }
 
     override fun displayError() {
         errorList.visibility = View.VISIBLE
         newsRecyclerView.visibility = View.GONE
+        noFavoriteNewsView.visibility = View.GONE
     }
 
     override fun onCreateView(
