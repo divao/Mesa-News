@@ -31,4 +31,5 @@ As tecnologias utilizadas no desenvolvimento do app foram as seguintes:
  * Navigation: Cicerone
  * Cache: RxPaper2
  * Reactive Extensions
+ * Light/Dark Mode
  * GitFlow
